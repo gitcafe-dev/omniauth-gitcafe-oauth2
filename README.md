@@ -24,7 +24,7 @@ Here's a quick example, adding the middleware to a Rails app in `config/initiali
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :gitcafe, ENV['GITCAFE_KEY'], ENV['GITCAFE_SECRET']
+  provider :gitcafe, ENV['GITCAFE_KEY'], ENV['GITCAFE_SECRET'], scope: "read, public"
 end
 ```
 
@@ -53,19 +53,22 @@ Here's an example *Authentication Hash* available in `request.env['omniauth.auth
     "expires"=>false
   },
   "extra"=>{
-    "raw_info"=>{"id"=>"548e8630c54d2d29f6000002",
-    "username"=>"test",
-    "email"=>"test@example.com",
-    "fullname"=>nil,
-    "location"=>nil,
-    "url"=>nil,
-    "avatar_url"=>"http://gravatar.com/avatar/76e23ac36354d843ba34ea458c19f648?default=identicon&size=60", "company"=>nil,
-    "public_repos"=>5,
-    "followers"=>0,
-    "following"=>0,
-    "created_at"=>"2014-12-15T06:56:48Z",
-    "updated_at"=>"2015-01-26T16:41:02Z"
-  }
+    "raw_info"=>
+      {
+        "id"=>"548e8630c54d2d29f6000002",
+        "username"=>"test",
+        "email"=>"test@example.com",
+        "fullname"=>nil,
+        "location"=>nil,
+        "url"=>nil,
+        "avatar_url"=>"http://gravatar.com/avatar/76e23ac36354d843ba34ea458c19f648?default=identicon&size=60", "company"=>nil,
+        "public_repos"=>5,
+        "followers"=>0,
+        "following"=>0,
+        "created_at"=>"2014-12-15T06:56:48Z",
+        "updated_at"=>"2015-01-26T16:41:02Z"
+      }
+    }
 }
 ```
 
