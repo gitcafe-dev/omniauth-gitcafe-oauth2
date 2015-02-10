@@ -4,7 +4,7 @@ module OmniAuth
   module Strategies
     class GitCafe < OmniAuth::Strategies::OAuth2
       option :client_options, {
-        :site           => "https://api.gitcafe.com",
+        :site           => "https://gitcafe.com",
         :authorize_url  => "/oauth/authorize",
       }
 
