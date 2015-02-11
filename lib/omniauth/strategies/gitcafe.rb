@@ -39,6 +39,7 @@ module OmniAuth
       end
 
       def raw_info
+        access_token.client.site = 'https://api.gitcafe.com'
         @raw_info ||= access_token.get("/api/v1/user.json").parsed
       end
     end
