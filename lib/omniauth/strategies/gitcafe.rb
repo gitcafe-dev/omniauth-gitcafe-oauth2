@@ -3,8 +3,21 @@ require "omniauth-oauth2"
 module OmniAuth
   module Strategies
     class GitCafe < OmniAuth::Strategies::OAuth2
+      def self.config
+        @config ||= {}
+
+        if block_given?
+          yield(@config)
+          option :client_options, {site: @config[:site_url]}
+        else
+          @config[:site_url] ||= "https://gitcafe.com"
+          @config[:api_url]  ||= "https://api.gitcafe.com"
+          @config
+        end
+      end
+
       option :client_options, {
-        :site           => "https://gitcafe.com",
+        :site           => config[:site_url],
         :authorize_url  => "/oauth/authorize",
       }
 
@@ -39,7 +52,7 @@ module OmniAuth
       end
 
       def raw_info
-        access_token.client.site = 'https://api.gitcafe.com'
+        access_token.client.site = self.class.config[:api_url]
         @raw_info ||= access_token.get("/api/v1/user.json").parsed
       end
     end
